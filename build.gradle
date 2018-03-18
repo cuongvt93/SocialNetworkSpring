@@ -30,4 +30,5 @@ dependencies {
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile('org.hibernate:hibernate-core:5.2.15.Final')
+	compile("org.springframework.boot:spring-boot-devtools")
 }
