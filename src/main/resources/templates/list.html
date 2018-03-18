@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+<body>
+	<nav th:replace="layout :: header"></nav>
+
+	<div class="container main-content list">
+		<div th:if="${success}"
+			class="row alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+			<span th:text="${success}"></span>
+		</div>
+		<div class="row">
+			<a th:href="@{/department/create}" class="btn btn-success pull-left">
+				<span class="glyphicon glyphicon-plus"></span> Add new department
+			</a>
+			<form class="form-inline pull-right" action="#"
+				th:action="@{/department/search}" method="GET">
+				<div class="form-group">
+					<input type="text" class="form-control" name="s"
+						placeholder="Type department name..." />
+				</div>
+				<button type="submit" class="btn btn-primary">Search</button>
+			</form>
+		</div>
+		<th:block th:if="${#lists.isEmpty(departments)}">
+			<h3>No department</h3>
+		</th:block>
+
+		<th:block th:unless="${#lists.isEmpty(departments)}">
+			<div class="row">
+				<table class="table table-bordered table-hover" id ="example">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>ID</th>
+							<th>Department Name</th>
+							<th>Department No</th>
+							<th>Location</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="depart,iterStat : ${departments}">
+							<td th:text="${iterStat.count}"></td>
+							<td th:text="${depart.id}"></td>
+							<td th:text="${depart.deptName}"></td>
+							<td th:text="${depart.deptNo}"></td>
+							<td th:text="${depart.location}"></td>
+							<td><a th:href="@{/department/{id}/edit(id=${depart.id})}"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+							<td><a th:href="@{/department/{id}/delete(id=${depart.id})}"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</th:block>
+	</div>
+	<!-- /.container -->
+
+	<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
