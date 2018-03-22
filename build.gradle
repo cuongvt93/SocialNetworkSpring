@@ -15,6 +15,10 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -41,5 +45,6 @@ dependencies {
 	compile("org.webjars:jquery:1.12.4")
 	compile("org.webjars:jquery:1.12.4")
 	compile group: 'org.webjars', name: 'datatables', version: '1.10.12'
+	compile("javax.servlet:jstl")
 	
 }
